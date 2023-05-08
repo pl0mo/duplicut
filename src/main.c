@@ -14,12 +14,13 @@
 
 struct conf g_conf = {
     .infile_name = NULL,
-    .outfile_name = NULL,
+    .outfile_name = DEFAULT_OUTPUT_FILE,
     .threads = 0,
     .line_max_size = DEFAULT_LINE_MAX_SIZE,
     .hmap_size = 0,
     .chunk_size = 0,
     .filter_printable = 0,
+    .quiet = 0,
     .memlimit = LONG_MAX,
 };
 
@@ -88,7 +89,9 @@ int             main(int argc, char **argv)
     update_status(FCLEAN_START);
     remove_duplicates();
     destroy_file();
-
-    display_report();
+    
+    // if (g_conf.quiet == 1) {
+    //     display_report();
+    // }
     return (0);
 }

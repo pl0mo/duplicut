@@ -129,6 +129,7 @@ void            config(void)
     DLOG1("g_conf.infile_name:       %s", g_conf.infile_name);
     DLOG1("g_conf.outfile_name:      %s", g_conf.outfile_name);
     DLOG1("g_conf.threads:           %u", g_conf.threads);
+    DLOG1("g_conf.quiet:             %u", g_conf.quiet);
     DLOG1("g_conf.line_max_size:     %u", g_conf.line_max_size);
     DLOG1("g_conf.hmap_size:         %s (%ld slots of %dbits)",
             sizerepr(g_conf.hmap_size * sizeof(t_line)),

@@ -22,6 +22,7 @@ static struct option    g_options[] = {
     { "memlimit",      required_argument, NULL, 'm' },
     { "line-max-size", required_argument, NULL, 'l' },
     { "printable",     no_argument,       NULL, 'p' },
+    { "quiet",         no_argument,       NULL, 'q' },
     { "lowercase",     no_argument,       NULL, 'c' },
     { "uppercase",     no_argument,       NULL, 'C' },
     { "help",          no_argument,       NULL, 'h' },
@@ -60,6 +61,9 @@ static void setopt_infile(const char *value)
  */
 static void setopt_outfile(const char *value)
 {
+    if (value == NULL) {
+        value = DEFAULT_OUTPUT_FILE;
+    }
     g_conf.outfile_name = value;
 }
 
@@ -109,10 +113,6 @@ static void setopt_line_max_size(const char *value)
     {
         bad_argument("line_max_size", value, "not a positive number");
     }
-    else if (line_max_size > 255)
-    {
-        bad_argument("line_max_size", value, "max value is 255");
-    }
     g_conf.line_max_size = (unsigned int) line_max_size;
 }
 
@@ -122,6 +122,14 @@ static void setopt_printable(const char *value)
     (void)value;
 
     g_conf.filter_printable = 1;
+}
+
+
+static void setopt_quiet(const char *value)
+{
+    (void)value;
+
+    g_conf.quiet = 1;
 }
 
 
@@ -148,18 +156,19 @@ static void setopt_help(const char *value)
            "Remove duplicate lines from INFILE without changing order.\n"
            "\n"
            "Options:\n"
-           "-o, --outfile <FILE>       Write result to <FILE>\n"
+           "-o, --outfile <FILE>       Write result to <FILE> (%s)\n"
            "-t, --threads <NUM>        Max threads to use (default max)\n"
            "-m, --memlimit <VALUE>     Limit max used memory (default max)\n"
            "-l, --line-max-size <NUM>  Max line size (default %d)\n"
            "-p, --printable            Filter ascii printable lines\n"
+           "-q, --quiet                Hide final duplicut report\n"
            "-c, --lowercase            Convert wordlist to lowercase\n"
            "-C, --uppercase            Convert wordlist to uppercase\n"
            "-h, --help                 Display this help and exit\n"
            "-v, --version              Output version information and exit\n"
            "\n"
            "Example: %s wordlist.txt -o new-wordlist.txt\n"
-           "\n", PROGNAME, DEFAULT_LINE_MAX_SIZE, PROGNAME);
+           "\n", PROGNAME, DEFAULT_OUTPUT_FILE, DEFAULT_LINE_MAX_SIZE, PROGNAME);
     exit(EXIT_SUCCESS);
 }
 
@@ -191,6 +200,7 @@ static void setopt(int opt, const char *value)
         { 'm', setopt_memlimit },
         { 'l', setopt_line_max_size },
         { 'p', setopt_printable },
+        { 'q', setopt_quiet },
         { 'c', setopt_lowercase },
         { 'C', setopt_uppercase },
         { 'h', setopt_help },
@@ -227,8 +237,9 @@ void        optparse(int argc, char **argv)
 {
     int             opt;
 
-    while ((opt = getopt_long(argc, argv, OPTSTRING, g_options, NULL)) >= 0)
+    while ((opt = getopt_long(argc, argv, OPTSTRING, g_options, NULL)) >= 0) {
         setopt(opt, optarg);
+    }
 
     /* STDIN can be used as infile (priority to --infile arg if exists) */
     if (optind == argc - 1)
@@ -241,12 +252,15 @@ void        optparse(int argc, char **argv)
         DLOG1("using STDIN as input file");
         setopt_infile("/dev/stdin");
     }
-    else
+    else {
         setopt_help(NULL);
+    }
 
-    if (g_conf.lowercase_wordlist && g_conf.uppercase_wordlist)
+    if (g_conf.lowercase_wordlist && g_conf.uppercase_wordlist) {
         error("cannot use '--lowercase' and '--uppercase' together");
+    }
 
-    if (g_conf.outfile_name == NULL)
+    if (g_conf.outfile_name == NULL) {
         error("mandatory argument: --outfile");
+    }
 }

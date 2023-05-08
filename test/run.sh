@@ -1,6 +1,23 @@
 #!/bin/bash
 
-cd `git rev-parse --show-toplevel`
+
+function print_info () {
+    echo -e "\033[1;34m[*]\033[0;36m $1\033[0m"
+}
+function print_good () {
+    echo -e "\033[1;32m[+]\033[0;32m $1\033[0m"
+}
+
+function print_bad () {
+    echo -e "\033[1;31m[-]\033[0;31m $1\033[0m"
+}
+
+
+
+if ! cd "$(git rev-parse --show-toplevel)";then
+    print_bad "Command 'git rev-parse --show-toplevel' failure."
+    exit 1
+fi
 
 _PROGRAM="./duplicut"
 _MAIN_DIR="./test"
@@ -11,18 +28,7 @@ _DEFAULT_ARCH="x64"
 _DEFAULT_TEST=$(find "$_TESTS_DIR" -maxdepth 1 -type f  \
                 -name '*.sh' -exec basename {} ';')
 
-BANNER=$(perl -E 'print "="x79 . "\r\t\t"')
-
-function print_info () {
-    echo -e "\033[1;34m[*]\033[0;36m $1\033[0m"
-}
-function print_good () {
-    echo -e "\033[1;32m[+]\033[0;32m $1\033[0m"
-}
-function print_bad () {
-    echo -e "\033[1;31m[-]\033[0;31m $1\033[0m"
-}
-
+BANNER="$(perl -E 'print "="x79 . "\r\t\t"')"
 
 # print an error message and exit
 function die ()
@@ -40,15 +46,14 @@ function die ()
 
 function build_program ()
 {
-    local _arch="$1"
+    local _arch="${1}"
     case "$_arch" in
         "x64")
             export FLAGS=""
             make coverage || die "Could not compile"
 
             fileinfo="$(file -b "$_PROGRAM" 2>&1)"
-            grep -q "x86.64" <<< "$fileinfo" \
-                || die "Bad filetype: $_PROGRAM: $fileinfo"
+            grep -q "x86.64" <<< "$fileinfo" || die "Bad filetype: $_PROGRAM: $fileinfo"
 
             ;;
         *)
