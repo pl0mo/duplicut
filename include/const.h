@@ -1,8 +1,8 @@
 #pragma once
 
-#define PROGNAME                "deduplicut"
+#define PROGNAME                "duplicut"
 #define PROJECT_VERSION         "2.3"
-#define PROJECT_URL             "http://github.com/havocesp/deduplicut"
+#define PROJECT_URL             "http://github.com/pl0mo/duplicut"
 
 /* portion of available memory to allow to hashmap */
 #define HMAP_MAX_SIZE           (0.5)

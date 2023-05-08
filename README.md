@@ -2,24 +2,24 @@
 
 <h3 align="center">
     Quickly dedupe massive wordlists, without changing the order
-    <a href="https://twitter.com/intent/tweet?text=Duplicut%3A%20Remove%20duplicates%20from%20MASSIVE%20wordlist%2C%20without%20sorting%20it%20(for%20dictionnary-based%20password%20cracking)%20-%20by%20%40nil0x42&url=https://github.com/nil0x42/duplicut">
+    <a href="https://twitter.com/intent/tweet?text=Duplicut%3A%20Remove%20duplicates%20from%20MASSIVE%20wordlist%2C%20without%20sorting%20it%20(for%20dictionnary-based%20password%20cracking)%20-%20by%20%40pl0mo&url=https://github.com/pl0mo/duplicut">
       <img src="https://img.shields.io/twitter/url?label=tweet&logo=twitter&style=social&url=http%3A%2F%2F0" alt="tweet">
     </a>
 </h3>
 <br>
 
 <p align="center">
-  <a href="https://github.com/nil0x42/duplicut/actions?query=branch%3Amaster">
-    <img src="https://img.shields.io/github/workflow/status/nil0x42/duplicut/Unit%20Tests/master?logo=githubactions" alt="github workflows">
+  <a href="https://github.com/pl0mo/duplicut/actions?query=branch%3Amaster">
+    <img src="https://img.shields.io/github/workflow/status/pl0mo/duplicut/Unit%20Tests/master?logo=githubactions" alt="github workflows">
   </a>
-  <a href="https://app.codacy.com/gh/nil0x42/duplicut/dashboard">
+  <a href="https://app.codacy.com/gh/pl0mo/duplicut/dashboard">
     <img src="https://img.shields.io/codacy/grade/b01c0228bd9148fb9d713a479dda4b25?logo=codacy&logoColor=green" alt="codacy code quality">
   </a>
-  <a href="https://lgtm.com/projects/g/nil0x42/duplicut/alerts/">
-    <img src="https://img.shields.io/lgtm/alerts/github/nil0x42/duplicut?logo=lgtm&logoColor=yellow" alt="lgtm alerts">
+  <a href="https://lgtm.com/projects/g/pl0mo/duplicut/alerts/">
+    <img src="https://img.shields.io/lgtm/alerts/github/pl0mo/duplicut?logo=lgtm&logoColor=yellow" alt="lgtm alerts">
   </a>
-  <a href="https://codecov.io/gh/nil0x42/duplicut">
-    <img src="https://img.shields.io/codecov/c/github/nil0x42/duplicut?color=orange&label=coverage&logo=codecov" alt="codecov coverage">
+  <a href="https://codecov.io/gh/pl0mo/duplicut">
+    <img src="https://img.shields.io/codecov/c/github/pl0mo/duplicut?color=orange&label=coverage&logo=codecov" alt="codecov coverage">
   </a>
 </p>
 
@@ -33,16 +33,16 @@
   <a href="https://www.blackarch.org/misc.html">
     <img src="https://img.shields.io/static/v1?label=BlackArch&message=packaged&color=red&logo=archlinux&logoColor=006">
   </a>
-  <a href="https://twitter.com/intent/follow?screen_name=nil0x42" target="_blank">
-    <img src="https://img.shields.io/twitter/follow/nil0x42.svg?logo=twitter" akt="follow on twitter">
+  <a href="https://twitter.com/intent/follow?screen_name=pl0mo" target="_blank">
+    <img src="https://img.shields.io/twitter/follow/pl0mo.svg?logo=twitter" akt="follow on twitter">
   </a>
 </p>
 
 <div align="center">
   <sub>
     Created by
-    <a href="https://twitter.com/nil0x42">nil0x42</a> and
-    <a href="https://github.com/nil0x42/duplicut/graphs/contributors">contributors</a>
+    <a href="https://twitter.com/pl0mo">pl0mo</a> and
+    <a href="https://github.com/pl0mo/duplicut/graphs/contributors">contributors</a>
   </sub>
 </div>
 
@@ -72,7 +72,7 @@ Unfortunately, **wordlist creation requires both**:
 ### :bulb: Quick start
 
 ```sh
-git clone https://github.com/nil0x42/duplicut
+git clone https://github.com/pl0mo/duplicut
 cd duplicut/ && make
 ./duplicut wordlist.txt -o clean-wordlist.txt
 ```
@@ -128,14 +128,14 @@ make debug level=1
 ./duplicut [OPTIONS] 2>&1 | tee /tmp/duplicut-debug.log
 ```
 
-[get-next-line]: https://github.com/nil0x42/duplicut/blob/master/src/line.c#L39
+[get-next-line]: https://github.com/pl0mo/duplicut/blob/master/src/line.c#L39
 
 [img-1-comparison]: data/img/1-comparison.png
 [img-2-line-struct]: data/img/2-line-struct.png
 [img-3-chunked-processing]: data/img/3-chunked-processing.png
 [img-4-help]: data/img/4-help.png
 
-[issue]: https://github.com/nil0x42/duplicut/issues
+[issue]: https://github.com/pl0mo/duplicut/issues
 [tagged-pointer]: https://en.wikipedia.org/wiki/Tagged_pointer
 
 [latex-n]: http://www.sciweavers.org/tex2img.php?fs=15&eq=n
